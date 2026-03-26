@@ -127,9 +127,29 @@ export class AssetTransferContract extends Contract {
     }
 
 
+    /**
+     * The meat and potatoes - the function in the contract that handles asset
+     * transfer from one party to another.
+     * @param ctx 
+     * @param id 
+     */
     @Transaction()
     public async transferAsset(ctx: Context, id:string|undefined): Promise<void> {
         const asset = new Asset(JSON.parse(await this.ReadAsset(ctx, id)));
+        let isDamaged = asset.isDamaged;
+
+        const damageMsg = `Cannot transfer a damaged asset - state unacceptable for delivery`;
+
+        if (isDamaged) {
+            throw new Error(damageMsg);
+        }
+
+        isDamaged = await this.assessDamage(ctx, asset.assetId);
+        if (isDamaged){
+            this.updateAsset(ctx, {...asset, isDamaged: true});
+            throw new Error(damageMsg);
+        }
+
 
         // TODO, hasn't been implemented because I don't know where we're storing
         // the data
