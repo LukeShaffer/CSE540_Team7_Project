@@ -65,7 +65,8 @@ contract and simulate peers.
     * `$ assetTransfer -c '{"function":"CreateAsset","Args":["asset_id_1"]}'`
     * `$ assetTransfer -c '{"function":"AssetExists","Args":["asset_id_1"]}'`
     * `$ assetTransfer -c '{"function":"ReadAsset","Args":["asset_id_1"]}'`
-    * ```
+    * Code block
+        ```
         $ assetTransfer -c '{
             "function": "setTolerances",
             "Args": [
@@ -78,5 +79,6 @@ contract and simulate peers.
                 }"
             ]
         }'
-     ```
+        ```
+    * `$ assetTransfer -c '{"function":"ReadAsset","Args":["asset_id_1"]}'`
 
