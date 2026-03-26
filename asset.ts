@@ -17,11 +17,11 @@ import {Object, Property, ClientIdentity} from 'fabric-contract-api';
 export interface ShippingLeg {
     shippingHandler: ClientIdentity,
     shippingReceiver: ClientIdentity,
-    isComplete: Boolean = false,
-    isSuccess: Boolean = false,
+    isComplete: Boolean
+    isSuccess: Boolean
 
-    transitTimeStartMs: Number,
-    maxTransitTimeMs: Number,
+    transitTimeStartMs: number,
+    maxTransitTimeMs: number,
 };
 
 // The common per-item tolerances that apply to every shipping leg
@@ -59,9 +59,9 @@ export class Asset {
 
     // used for tracking location for custody hand offs
     @Property()
-    currentLat: Number = 0;
+    currentLat: number = 0;
     @Property()
-    currentLong: Number = 0;
+    currentLong: number = 0;
 
     // An array of legs - trips from one handler to another.
     @Property()
@@ -73,8 +73,8 @@ export class Asset {
     constructor(
         assetId: string,
         isShipped: boolean = false, isDelivered: Boolean = false,
-        isDamaged: Boolean = false, currentLat: Number = 0,
-        currentLong: Number = 0, shippingLegs: ShippingLeg[] = [],
+        isDamaged: Boolean = false, currentLat: number = 0,
+        currentLong: number = 0, shippingLegs: ShippingLeg[] = [],
     ) {
         this.assetId = assetId;
         this.isShipped = isShipped;
@@ -96,9 +96,7 @@ export class Asset {
      */
     getCurrentState() {};
 
-    getCurrentDeliveryReceiver() {
-        this.shippingLegs.forEach(leg => {
-            if (!leg.isComplete) return leg.shippingReceiver;
-        })
+    getCurrentShippingLeg(): ShippingLeg|undefined {
+        return this.shippingLegs.find(leg => leg.isComplete)
     }
 }

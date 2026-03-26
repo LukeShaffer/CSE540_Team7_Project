@@ -123,6 +123,18 @@ export class AssetTransferContract extends Contract {
                 if (tolVal < assetStats.get(tolName)) return true;
             }
         }
+
+        // Check that the current time elapsed in this shipping leg has not exceeded the max
+        const currentShippingLeg = asset.getCurrentShippingLeg();
+        const start = currentShippingLeg?.transitTimeStartMs;
+        const maxDur = currentShippingLeg?.maxTransitTimeMs;
+
+        // We will ignore the possibility of timezones from now on and assume
+        // everyone is transacting in UTC
+        if (start && maxDur && Date.now() > start + maxDur) {
+            return true;
+        }
+
         return false;
     }
 
@@ -154,7 +166,7 @@ export class AssetTransferContract extends Contract {
         // TODO, hasn't been implemented because I don't know where we're storing
         // the data
         const assetCurrentLocation = asset.getCurrentLocation();
-        const assetReceiver = asset.getCurrentDeliveryReceiver()
+        const assetReceiver = asset.getCurrentShippingLeg()?.shippingReceiver;
 
         // TODO, not sure how I am going to link delivery party identities with
         // an immutable delivery location, but that is what I am looking to do
