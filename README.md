@@ -7,7 +7,12 @@ an asset damage tracker, so that all parties in the supply chain have a clean
 and verifiable mechanism of checking on the delivery and condition of their
 goods. 
 
-We aim to implement a basic asset tracking and shipment handling interface
+We aim to implement a basic asset tracking and shipment handling interface,
+where the assets being shipped around the world are trackable items on the
+blockchain, where any party involved in their shipment or procurement may look
+up and assess the current state of tracked assets and be assured that only the
+proper parties have access to the delivery and status records of all materials.
+
 
 # Basic Background / Reading
 
@@ -23,4 +28,5 @@ We aim to implement a basic asset tracking and shipment handling interface
 
 
 # Basic Usage / Deployment
+TODO - will fill in when everything is more concrete
 
