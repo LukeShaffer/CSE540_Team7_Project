@@ -60,18 +60,18 @@ contract and simulate peers.
     * `$ assetTransfer -c '{"function":"CreateAsset","Args":["asset_id_1"]}'`
     * `$ assetTransfer -c '{"function":"AssetExists","Args":["asset_id_1"]}'`
     * `$ assetTransfer -c '{"function":"ReadAsset","Args":["asset_id_1"]}'`
-    * ```$ assetTransfer -c '{"function":"setTolerances","Args":["asset_id_1", {
-        "function": "setTolerances",
-        "Args": [
-            "asset_id_1", "{
-        \"humidityMin\": 13,
-        \"humidityMax\": 65,
-
-        \"tempMin\": 20,
-        \"tempMax\": 80,
-
-        \"shockMax\": 10
-        }"]
-    }]}'
+    * ```
+        $ assetTransfer -c '{
+            "function": "setTolerances",
+            "Args": [
+                "asset_id_1", "{
+                    \"humidityMin\": 13,
+                    \"humidityMax\": 65,
+                    \"tempMin\": 20,
+                    \"tempMax\": 80,
+                    \"shockMax\": 10
+                }"
+            ]
+        }'
     ```
 
